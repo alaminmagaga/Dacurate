@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+
+             
+
+  <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 my-10">
+    <h2 class="text-3xl font-semibold text-gray-700 capitalize dark:text-white text-center">Register</h2>
+   
+    <form method="POST">
+        {% csrf_token %}
+
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" style="font-size: 20px;">Username</label>
+                <input name="username" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+<br>
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" style="font-size: 20px;">Email</label>
+                <input name="email" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+<br>
+
+           <div>
+                <label class="text-gray-700 dark:text-gray-200" style="font-size: 20px;">Password</label>
+                <input name="password1" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+<br>
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" style="font-size: 20px;">Comfirm Password</label>
+                <input name="password2" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+<br>
+            <div class="flex justify-center mt-6">
+      
+                <p class="w3-container w3-center" style="font-size: 12px;">By clicking Signup, you agree to the Website User Agreement, Privacy Policy, and Cookie Policy.</p>
+               </div>
+
+
+
+
+               
+        <div class="flex justify-center mt-6">
+            <button class="w-2/3 px-6 py-3 leading-5 bg-green-500 hover:bg-green-800 text-white text-lg transition-colors duration-200 transform  rounded-md  focus:outline-none focus:bg-blue-600">Sign Up</button>
+        </div>
+       
+        <div class="flex justify-between items-center mt-1">
+            <hr class="w-full border-gray-300"> <span class="p-2 text-gray-400 text-xs">OR</span>
+            <hr class="w-full border-gray-300">
+        </div>
+
+        <div class="flex justify-center mt-6">
+            <button class="w-2/3 px-6 py-3 leading-5 bg-red-500 hover:bg-green-800 text-white text-lg transition-colors duration-200 transform  rounded-md  focus:outline-none focus:bg-blue-600">Signup with Google</button>
+        </div>
+
+    </form>
+</section>
+
+
+
+
+  
+{% endblock %}

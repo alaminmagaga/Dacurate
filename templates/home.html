@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+<br><br><br>
+<div  class="w3-container w3-border w3-padding-64  w3-white" style="margin: auto;">
+
+
+ 
+  <div class="w3-container   w3-round flex" style="width:100%;margin: auto;">   
+    
+  <button type="button"  class="inline-flex items-center bg-gray-800  text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+              <span class="sr-only">Open user menu</span>
+
+              {% if user.profile.profile_pic.url %}
+              <img class="h-10 w-10 rounded-full" src="{{user.profile.profile_pic.url}}" alt="">
+             {% else %}
+            
+             <img class="h-10 w-10 rounded-full" src="{% static 'user1.jpeg' %}" alt="">
+              {% endif %}
+            
+           
+              
+            </button>
+          
+
+
+ 
+    <input class="flex w3-border w3-lightgrey rounded-2xl" type="text" name="" style="width:100%;margin-left:10px;">
+
+
+    </div>
+<br>
+  <div class="w3-container w3-row w3-lightgrey w3-center">
+<div class=" w3-col w3-container s4 m4 l4 w3-border-right">
+
+  <a href="{% url 'add-post1' %}"><img src="{% static 'ask.png' %}" style="width:35px;margin:auto;"></a>
+</div>
+
+<div class=" w3-col w3-container s4 m4 l4 w3-border-right">  
+<a href="http://127.0.0.1:8000/category/questions/"><img src="{% static 'answers.png' %}" style="width:35px;margin:auto;"></a>
+
+</div>
+<div class="w3-col w3-container s4 m4 l4">  
+<a href="{% url 'add-post' %}"><img src="{% static 'write.png' %}" style="width:30px;margin:auto;"></a>
+
+</div>
+</div>
+
+
+</div>
+
+ <br>
+
+
+ {% for post in object_list %}
+<div class="w3-container w3-white w3-padding">
+
+
+ 
+<div class="flex">
+  <div class="w3-container">
+   
+   <img class="h-10 w-10 rounded-full" src="{{post.author.profile.profile_pic.url}}" alt="">
+  </div>
+ 
+  
+
+
+
+  <div class="inline-flex">
+    <span>{{post.author}}</span>
+    
+    
+    
+    
+  </div>
+  <div class="inline-flex">
+    
+    
+      
+     
+      
+    </form>
+
+
+
+   &nbsp &nbsp &nbsp
+   <form action="{% url 'follow' post.pk %}"  method="POST">
+   {% csrf_token %}
+   <button type="submit"  name="follow_id" value="{{post.id}}" class="btn btn-secondary"><img src="{% static 'share.png' %}" style="width:20px;margin:auto;"></button>
+  </form>
+  {{post.followers.count}}
+
+
+
+
+   {% if user.is_authenticated %} 
+   {% if user.id == post.author.id %}
+   
+   
+   {% if post.category == 'questions' %}
+   <a href="{% url 'update-question' post.pk %}">Edit</a>
+
+   {% else %}
+   <a href="{% url 'update-post' post.pk %}">Edit</a>
+  
+   {% endif %}
+
+   <a href="{% url 'delete-post' post.pk %}">Delete</a><br>
+
+   {% endif %}
+    {% endif %}
+  </div>
+</div>
+<div class="w3-container w3-padding"><h4><b>{{post.title}}</b></h4><h4>{{post.post_date}}</h4>
+
+ 
+<h3><a href="{% url 'article-detail'  post.pk %}">{{post.title_tag}}</a></h3><a href="{% url 'category' post.category|slugify %}">{{post.category}}</a></div>
+<div class="w3-container">
+
+  {% if post.header_image %}
+  <a href="{% url 'article-detail'  post.pk %}"><img src="media/{{post.header_image}}" style="width: 100%;"></a>
+  {% else %}
+  
+  {% endif %}
+</div>
+<br>
+
+
+<div class="w3-container w3-center">
+  <div class="w3-row">
+  <div class="w3-col s3 m3 l3" id="{{post.pk}}">
+
+
+    
+    <form action="{% url 'like_post' post.pk %}"  method="POST">
+      {% csrf_token %}
+      
+      <button type="submit"  name="post_id" value="{{post.id}}" class="btn btn-secondary"><img src="{% static 'like1.png' %}" style="width:20px;margin:auto;"></button>
+      {{post.likes.count}}
+    </form>
+
+  
+  </div>
+  <div class="w3-col s3 m3 l3">
+    <p>
+    <a href="#"><img src="{% static 'chat1.png' %}" style="width:20px;margin:auto;"></a>
+    </p>
+  </div>
+  <div class="w3-col s3 m3 l3">
+    <p>
+    <a href="#"><img src="{% static 'retweet.png' %}" style="width:20px;margin:auto;"></a>
+    </p>
+  </div>
+  <div class="w3-col s3 m3 l3">
+    <p>
+    <a href="http://127.0.0.1:8000/#{{post.id}}"><img src="{% static 'share.png' %}" style="width:20px;margin:auto;"></a>
+    </p>
+  </div>
+</div>
+</div>
+
+</div>
+<br>
+{% endfor %}
+
+
+
+
+
+<script>
+// Automatic Slideshow - change image every 4 seconds
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 4000);    
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+var modal = document.getElementById('ticketModal');
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
+
+{% endblock %}

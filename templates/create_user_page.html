@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<br><br>
+<h1 class="w3-center" style="font-size: 40px;"> Create Profile Page</h1>
+<div class="form-group">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    {{form.as_p}}
+    <br>
+    <button class="btn btn-secondary">create Profile Page</button>
+
+
+
+   
+</form>
+</div>
+{% else %}
+You are not allow Here, and You know it
+{% endif %}
+{% endblock %}

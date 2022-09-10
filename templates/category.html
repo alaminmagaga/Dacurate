@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<br><br><br>
+<h1 class="w3-center" style="font-size: 40px;"> Questions </h1><br>
+
+{% if  category_post %}
+
+
+
+{% for post in category_post %}
+<div class="w3-container w3-white w3-padding">
+
+
+ 
+    <div class="flex">
+      <div class="w3-container">
+       
+       <img class="h-10 w-10 rounded-full" src="{{post.author.profile.profile_pic.url}}" alt="">
+      </div>
+     
+      
+    
+    
+    
+      <div class="inline-flex">
+        <span>{{post.author}}</span>
+        
+        
+        
+        
+      </div>
+      <div class="inline-flex">
+        
+        
+          
+         
+          
+        </form>
+    
+    
+    
+       &nbsp &nbsp &nbsp
+       
+    
+    
+    
+       {% if user.is_authenticated %} 
+       {% if user.id == post.author.id %}
+       
+       
+       {% if post.category == 'questions' %}
+       <a href="{% url 'update-question' post.pk %}">Edit</a>
+    
+       {% else %}
+       <a href="{% url 'update-post' post.pk %}">Edit</a>
+      
+       {% endif %}
+    
+       <a href="{% url 'delete-post' post.pk %}">Delete</a><br>
+    
+       {% endif %}
+        {% endif %}
+      </div>
+    
+      
+    </div>
+    <div class="w3-container w3-padding"><h4><b>{{post.title}}</b></h4><h4>{{post.post_date}}</h4>
+    
+     
+    <h3><a href="{% url 'article-detail'  post.pk %}">{{post.title_tag}}</a></h3><a href="{% url 'category' post.category|slugify %}">{{post.category}}</a></div>
+    <div class="w3-container">
+    
+      {% if post.header_image %}
+      <a href="{% url 'article-detail'  post.pk %}"><img src="media/{{post.header_image}}" style="width: 100%;"></a>
+      {% else %}
+      
+      {% endif %}
+    </div>
+
+    
+    {{post.body|safe}}
+    <br>
+    
+    
+    <div class="w3-container w3-center">
+      <div class="w3-row">
+      <div class="w3-col s3 m3 l3" id="{{post.pk}}">
+    
+    
+        
+        <form action="{% url 'like_post' post.pk %}"  method="POST">
+          {% csrf_token %}
+          
+    
+          <span class="" id="like_count">{{post.like_count}}</span>
+              <button class="btn btn-link text-dark p-0 border-0 btn-outline-light" id="like-button" value="{{post.id}}" name="post_id">
+                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-heart" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                </svg>
+              </button>
+        </form>
+    
+      
+      </div>
+      <div class="w3-col s3 m3 l3">
+        <p>
+        <a href="#"><img src="{% static 'chat1.png' %}" style="width:20px;margin:auto;"></a>
+        </p>
+      </div>
+      <div class="w3-col s3 m3 l3">
+        <p>
+        <a href="#"><img src="{% static 'retweet.png' %}" style="width:20px;margin:auto;"></a>
+        </p>
+      </div>
+      <div class="w3-col s3 m3 l3">
+        <p>
+        <a href="http://127.0.0.1:8000/#{{post.id}}"><img src="{% static 'share.png' %}" style="width:20px;margin:auto;"></a>
+        </p>
+      </div>
+    </div>
+    </div>
+    
+    </div>
+    <br>
+
+
+
+
+
+
+
+
+  
+ 
+
+{% endfor %}
+
+
+{% else %}
+<h2>sorry, there is no News for this article</h2>
+
+{% endif %}
+
+
+
+
+
+
+
+{% endblock %}
