@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import AddPostView1, HomeView,ArticleDetailView,AddPostView,AddPostView1,UpdatePostView,DeletePostView,LikeView,UserEditView,PasswordsChangeView,ShowProfilePageView,EditProfilePageView,CreateProfilePageView,AddCommentView,UserRegisterView,FollowerView,CategoryView,CategoryListView,UpdateQuestionView
+from .views import AddPostView1, HomeView,ArticleDetailView,AddPostView,AddPostView1,UpdatePostView,DeletePostView,LikeView,UserEditView,PasswordsChangeView,ShowProfilePageView,EditProfilePageView,CreateProfilePageView,AddCommentView,UserRegisterView,FollowerView,CategoryView,CategoryListView,UpdateQuestionView,AddCommentView1
 from . import views
 
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('<int:pk>/edit_profile/',EditProfilePageView.as_view(), name='edit-profile-page'),
     path('create_profile_page/',CreateProfilePageView.as_view(), name='create-profile-page'),
     path('article/<int:pk>/comment/',AddCommentView.as_view(),name='comment'),
+     path('article/<int:pk>/comment1/',AddCommentView1.as_view(),name='comment1'),
     path('category/<str:cats>/',CategoryView,name='category'),
     path('category-list',CategoryListView,name='category-list'),
     

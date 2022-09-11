@@ -91,9 +91,12 @@
    &nbsp &nbsp &nbsp
    <form action="{% url 'follow' post.pk %}"  method="POST">
    {% csrf_token %}
-   <button type="submit"  name="follow_id" value="{{post.id}}" class="btn btn-secondary"><img src="{% static 'share.png' %}" style="width:20px;margin:auto;"></button>
+   
+   <button type="submit"  name="follow_id" value="{{post.id}}" >Follow</button>
+  
   </form>
   {{post.followers.count}}
+ 
 
 
 
@@ -104,6 +107,7 @@
    
    {% if post.category == 'questions' %}
    <a href="{% url 'update-question' post.pk %}">Edit</a>
+ 
 
    {% else %}
    <a href="{% url 'update-post' post.pk %}">Edit</a>
@@ -140,15 +144,16 @@
     <form action="{% url 'like_post' post.pk %}"  method="POST">
       {% csrf_token %}
       
-      <button type="submit"  name="post_id" value="{{post.id}}" class="btn btn-secondary"><img src="{% static 'like1.png' %}" style="width:20px;margin:auto;"></button>
+      <button type="submit"  name="post_id" value="{{post.id}}" ><img src="{% static 'like1.png' %}" style="width:20px;margin:auto;"></button>
       {{post.likes.count}}
+      {{post.comment}}
     </form>
 
   
   </div>
   <div class="w3-col s3 m3 l3">
     <p>
-    <a href="#"><img src="{% static 'chat1.png' %}" style="width:20px;margin:auto;"></a>
+    <a href="{% url 'comment1' post.pk %}"><img src="{% static 'chat1.png' %}" style="width:20px;margin:auto;"></a>
     </p>
   </div>
   <div class="w3-col s3 m3 l3">

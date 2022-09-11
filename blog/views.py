@@ -2,7 +2,7 @@ from contextlib import redirect_stderr
 from multiprocessing import context
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Post,Category,Profile,Comment
-from .forms import PostForm,PasswordChangingForm, PostForm,PostForm1,EditForm,EditProfileForm,ProfilePageform,CommentForm,SignUpForm,ProfileEditform,EditForm1
+from .forms import PostForm,PasswordChangingForm, PostForm,PostForm1,EditForm,EditProfileForm,ProfilePageform,CommentForm,SignUpForm,ProfileEditform,EditForm1,CommentForm1
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm,PasswordChangeForm
 from django.urls import reverse_lazy,reverse
@@ -192,4 +192,15 @@ class AddCommentView(CreateView):
     def form_valid(self, form):
         form.instance.post_id=self.kwargs['pk']
         return super().form_valid(form)
-success_url=reverse_lazy('home')
+    success_url=reverse_lazy('home')
+
+
+class AddCommentView1(CreateView):
+    model=Comment
+    form_class=CommentForm1
+    template_name="add_comment1.html"
+    #fields='__all__'
+    def form_valid(self, form):
+        form.instance.post_id=self.kwargs['pk']
+        return super().form_valid(form)
+    success_url=reverse_lazy('home')
