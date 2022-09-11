@@ -18,3 +18,4 @@ pandas
 numpy
 whitenoise
 django-ckeditor==6.5.1
+django-allauth
