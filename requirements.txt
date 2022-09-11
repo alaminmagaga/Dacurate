@@ -17,4 +17,4 @@ typing-extensions==3.10.0.0
 pandas
 numpy
 whitenoise
-git+git://github.com/divio/djangocms-text-ckeditor.git
+django-ckeditor==6.5.1
