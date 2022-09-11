@@ -26,7 +26,7 @@ SECRET_KEY = '1kw7w@g*i3k2+!y923&uzq57l8vsdgsbj2qepr6c@^)iv2%vi2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dacurate-forum.herokuapp.com','127.0.0.1']
 
 
 # Application definition
