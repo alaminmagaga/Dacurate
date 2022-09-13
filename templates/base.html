@@ -53,7 +53,7 @@
 
     {% else %}
     <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
-   
+    <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Register</a>
     {% endif %}
 
 
@@ -68,10 +68,29 @@
 
 <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
 <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-  <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BAND</a>
-  <a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TOUR</a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+  <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
+  {% if user.is_authenticated %} 
+
+  
+  {% if user.profile.id %}
+  <a href="{% url 'edit-profile-page' user.profile.id %}" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">profile</a>
+  {% else %}
+  <a class="w3-bar-item w3-button w3-padding-large" href="{% url 'create-profile-page' %}">Create Profile Page</a>
+  {% endif %}
+  
+  <a href="{% url 'edit-profile' %}" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">settings</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">notification</a>
+  <a href="{% url 'logout' %}" class="w3-bar-item w3-button w3-padding-large">Logout</a>
+
+  {% else %}
+  
+  
+  <a href="{% url 'login' %}" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
+  <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Register</a>
+  {% endif %}
+  
+
+  
 </div>
 
 <br><br><br>

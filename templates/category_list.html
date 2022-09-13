@@ -4,7 +4,7 @@
 <h1> Blog Categories</h1>
 {% for item in cat_menu_list %}
 
-<a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a>
+<a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item.questions}}</a>
 {% endfor %}
 
 

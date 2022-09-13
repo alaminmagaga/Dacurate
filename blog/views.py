@@ -9,6 +9,7 @@ from django.urls import reverse_lazy,reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
+from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your views here.
@@ -31,14 +32,15 @@ def CategoryListView(request):
 class UserRegisterView(CreateView):
     form_class=SignUpForm
     template_name='register.html'
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('login')
 
+         
+        
 
 
 
 def LikeView(request, pk):
     post=get_object_or_404(Post, id=request.POST.get('post_id'))
-    
     liked=False
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user.id)
@@ -47,8 +49,6 @@ def LikeView(request, pk):
         post.likes.add(request.user.id)
         liked=True
 
-    #return redirect (reverse('home', post.pk) + '#{{post.pk}}')
-    #return HttpResponseRedirect(reverse('article-detail', args=[post.pk])+ '#{{post.pk}}')
     return redirect('home')
 
 
@@ -80,6 +80,10 @@ class HomeView(ListView):
         context=super(HomeView, self).get_context_data(*args,**kwargs)
         context['cat_menu']= cat_menu
         return context
+
+    
+
+        
 
     
 

@@ -44,9 +44,12 @@ class Post(models.Model):
     body=RichTextField(blank=True, null=True)
     post_date=models.DateField(auto_now_add=True)
     category=models.CharField(max_length=255, default='questions')
-    likes=models.ManyToManyField(User, related_name='blog_post')
+    likes = models.ManyToManyField(
+        User, related_name='like', default=None, blank=True)
+    like_count = models.BigIntegerField(default='0')
     followers=models.ManyToManyField(User, related_name='blog_followers')
     profile= models.ForeignKey(Profile,null=True, on_delete=models.CASCADE)
+    
 
     def  total_likes(self):
         return self.likes.count()
@@ -83,6 +86,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
+
+   
 
     def get_absolute_url(self):
         return reverse('article-detail',args=(str(self.id)))
